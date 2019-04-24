@@ -1,6 +1,13 @@
-import React from 'react';
+ // you will need a place to store your state in this component.
+  // design `App` to be the parent component of your application.
+  // this component is going to take care of state, and any change handlers you need to work with your state
 
-const list = [
+import React from 'react';
+import ToDoForm from './components/TodoComponents/TodoForm'
+// import ToDo from './components/TodoComponents/Todo'
+import ToDoList from './components/TodoComponents/TodoList'
+
+const toDos = [
   {
     task: 'Laundry',
     id: 1,
@@ -13,7 +20,7 @@ const list = [
   },  
   {
     task: 'Swiffer',
-    id: 1,
+    id: 3,
     completed: false
   }
 ];
@@ -21,15 +28,47 @@ const list = [
 class App extends React.Component {
   constructor(){
     super();
-
+    this.state = {
+      toDosOnState: toDos,
+      toDos: {
+        task: "",
+        id: "",
+        completed: ""
+      }
+    };
   }
-  // you will need a place to store your state in this component.
-  // design `App` to be the parent component of your application.
-  // this component is going to take care of state, and any change handlers you need to work with your state
+
+  handleInputChange = event => {
+    {
+      this.setState({
+          [event.target.name]: event.target.value
+      });
+    };
+  }
+
+  newToDo = event => {
+    event.preventDefault();
+    this.setState({
+      toDosOnState: [
+        ...this.state.toDosOnState,
+        {task: this.state.toDo}
+      ],     
+      task: ""
+    });
+  };
+
+
   render() {
     return (
-      <div>
+      <div className="App">
         <h2>Welcome to your Todo App!</h2>
+          
+        <ToDoList bananaToDoList={this.state.toDosOnState}/>
+
+        <ToDoForm 
+            newToDo={this.newToDo} 
+            onChange={this.handleInputChange}
+        />
       </div>
     );
   }
