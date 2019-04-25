@@ -3,7 +3,8 @@ import React from 'react';
 function ToDo(props){
     return (
         <div>
-            {props.toDo.task}
+          <ul> {props.toDo.task} </ul>
+
         </div>
     )
 }

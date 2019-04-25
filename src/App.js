@@ -51,7 +51,7 @@ class App extends React.Component {
     this.setState({
       toDosOnState: [
         ...this.state.toDosOnState,
-        {task: this.state.toDo}
+        {task: this.state.toDo.task}
       ],     
       task: ""
     });
@@ -63,11 +63,14 @@ class App extends React.Component {
       <div className="App">
         <h2>Welcome to your Todo App!</h2>
           
-        <ToDoList bananaToDoList={this.state.toDosOnState}/>
+        <ToDoList 
+          bananaToDoList={this.state.toDosOnState} 
+        />
 
         <ToDoForm 
             newToDo={this.newToDo} 
             onChange={this.handleInputChange}
+            onClick={this.newToDo} //these are the props args
         />
       </div>
     );
