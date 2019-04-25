@@ -61,13 +61,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Welcome to your To Do App!</h2>
+      <div className="container">
+        <h1>To Do App</h1>
 
-        <ul>  {this.state.toDoListState.map( toDo => {
+        <ul className="to-do-list">  {this.state.toDoListState.map( toDo => {
            return (
             <ToDo 
-              toDo={toDo} 
+              toDo={toDo}       //passing through the item you're mapping over as props
               toggleComplete={this.toggleComplete} 
             />
           )

@@ -2,8 +2,9 @@ import React from 'react';
 
 function ToDoForm(props){
     return (
-        <form>
+        <form className="to-do-form">
           <input 
+            className="to-do-input"
             value={props.task}
             placeholder="...to do"
             onChange={props.handleInputChange} 
