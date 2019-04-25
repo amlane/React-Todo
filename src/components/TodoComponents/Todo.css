@@ -1,0 +1,7 @@
+html, body {
+    background: pink;
+}
+
+.completed {
+    text-decoration: line-through;
+}
