@@ -1,4 +1,6 @@
 import React from 'react';
+import ToDo from './components/TodoComponents/Todo';
+import ToDoForm from './components/TodoComponents/TodoForm';
 
 
 const toDoList = [
@@ -27,7 +29,7 @@ class App extends React.Component {
     this.setState({ task: event.target.value })
   }
 
-  handleClickEvent = (event) => {
+  handleClickEvent = (event) => {   //adds new to do on click
     event.preventDefault();
     const newToDo = {           //new To Do created
       task: this.state.task,
@@ -49,28 +51,33 @@ class App extends React.Component {
     this.setState({ toDoListState: updatedList })
   }
 
+  clearCompleted = (event) => {
+    event.preventDefault();
+    const updatedListAfterClear = this.state.toDoListState.filter( toDo => {
+      return !toDo.completed;
+    })
+    this.setState({ toDoListState: updatedListAfterClear })
+  }
+
   render() {
     return (
       <div>
         <h2>Welcome to your To Do App!</h2>
 
-        {this.state.toDoListState.map( toDo => {
-          return (
-            <ul><li 
-            // className={this.state.toDo.completed ? "completed": ""} 
-            onClick={() => this.toggleComplete (this.state.toDo.id)}>{toDo.task}</li></ul>
+        <ul>  {this.state.toDoListState.map( toDo => {
+           return (
+            <ToDo 
+              toDo={toDo} 
+              toggleComplete={this.toggleComplete} 
+            />
           )
-        })}
-        <form>
-          <input 
-            value={this.state.task}
-            placeholder="...to do"
-            onChange={this.handleInputChange} 
-          />
+        })}   </ul>
 
-          <button onClick={this.handleClickEvent}>Add To Do</button>
-          <button>Clear Completed</button>
-        </form>
+        <ToDoForm 
+          handleInputChange={this.handleInputChange} 
+          handleClickEvent={this.handleClickEvent}
+          clearCompleted={this.clearCompleted}
+        />
       </div>
     );
   }
