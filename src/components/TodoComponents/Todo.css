@@ -59,6 +59,11 @@ h1,
     border-bottom-left-radius: 15px;
 }
 
+li {
+    font-size: 2rem;
+    padding: 5px;
+}
+
 .to-do-form button:hover {
     background: dodgerblue;
     cursor: pointer;

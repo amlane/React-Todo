@@ -3,25 +3,14 @@ import ToDo from './components/TodoComponents/Todo';
 import ToDoForm from './components/TodoComponents/TodoForm';
 
 
-const toDoList = [
-  {
-    task: 'Organize Garage',
-    id: 1,
-    completed: false
-  },
-  {
-    task: 'Bake Cookies',
-    id: 2,
-    completed: false
-  }
-];
+const toDoList = [];
 
 class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      task: "",
-      toDoListState: toDoList
+      toDoListState: toDoList,
+      task: ""
     }
   }
 
@@ -36,6 +25,8 @@ class App extends React.Component {
       id: Date.now(),
       completed: false
     }
+
+    if(!this.state.task) return;
     this.setState({ 
       toDoListState: [...this.state.toDoListState, newToDo], //copy: this.state.toDoListState.push(newToDo)
       task: ""   //clears input after you've pressed return or clicked button
@@ -45,8 +36,8 @@ class App extends React.Component {
   toggleComplete = (id) => {
     const updatedList = this.state.toDoListState.map( item => {
       if (item.id === id) 
-      return {...item, completed: !item.completed};
-      return item;
+      return {...item, completed: !item.completed}; 
+      return item;  //else return item
     } )
     this.setState({ toDoListState: updatedList })
   }
@@ -77,6 +68,7 @@ class App extends React.Component {
           handleInputChange={this.handleInputChange} 
           handleClickEvent={this.handleClickEvent}
           clearCompleted={this.clearCompleted}
+          task={this.state.task}
         />
       </div>
     );
